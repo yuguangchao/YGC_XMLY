@@ -22,6 +22,10 @@
 		3C92BD9225C276720018B9E7 /* UIColor+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C92BD9025C276720018B9E7 /* UIColor+Extensions.m */; };
 		3C92BDA025C279340018B9E7 /* YMHomePageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C92BD9F25C279340018B9E7 /* YMHomePageView.m */; };
 		3C92BDAC25C294900018B9E7 /* YMCarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C92BDAB25C294900018B9E7 /* YMCarouselView.m */; };
+		3C92BDB525C3B0290018B9E7 /* YMTabItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C92BDB425C3B0280018B9E7 /* YMTabItemView.m */; };
+		3C92BDBD25C3D5F30018B9E7 /* YMItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C92BDBC25C3D5F30018B9E7 /* YMItemModel.m */; };
+		3C92BDC625C3D66A0018B9E7 /* YMHomePageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C92BDC525C3D66A0018B9E7 /* YMHomePageViewModel.m */; };
+		3C92BDCC25C3D7B00018B9E7 /* YMBannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C92BDCB25C3D7B00018B9E7 /* YMBannerModel.m */; };
 		61219BEE3F06824CEABD8D8C /* libPods-XMLY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F1570B9882E3B7BAA2C76148 /* libPods-XMLY.a */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +78,14 @@
 		3C92BD9F25C279340018B9E7 /* YMHomePageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YMHomePageView.m; sourceTree = "<group>"; };
 		3C92BDAA25C294900018B9E7 /* YMCarouselView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMCarouselView.h; sourceTree = "<group>"; };
 		3C92BDAB25C294900018B9E7 /* YMCarouselView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMCarouselView.m; sourceTree = "<group>"; };
+		3C92BDB325C3B0280018B9E7 /* YMTabItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YMTabItemView.h; sourceTree = "<group>"; };
+		3C92BDB425C3B0280018B9E7 /* YMTabItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YMTabItemView.m; sourceTree = "<group>"; };
+		3C92BDBB25C3D5F30018B9E7 /* YMItemModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YMItemModel.h; sourceTree = "<group>"; };
+		3C92BDBC25C3D5F30018B9E7 /* YMItemModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YMItemModel.m; sourceTree = "<group>"; };
+		3C92BDC425C3D66A0018B9E7 /* YMHomePageViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YMHomePageViewModel.h; sourceTree = "<group>"; };
+		3C92BDC525C3D66A0018B9E7 /* YMHomePageViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YMHomePageViewModel.m; sourceTree = "<group>"; };
+		3C92BDCA25C3D7B00018B9E7 /* YMBannerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YMBannerModel.h; sourceTree = "<group>"; };
+		3C92BDCB25C3D7B00018B9E7 /* YMBannerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YMBannerModel.m; sourceTree = "<group>"; };
 		66D32D1136DE30C0D97FAE93 /* Pods-XMLY.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XMLY.release.xcconfig"; path = "Target Support Files/Pods-XMLY/Pods-XMLY.release.xcconfig"; sourceTree = "<group>"; };
 		CEC822E582793B51C37ABFFB /* Pods-XMLY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XMLY.debug.xcconfig"; path = "Target Support Files/Pods-XMLY/Pods-XMLY.debug.xcconfig"; sourceTree = "<group>"; };
 		F1570B9882E3B7BAA2C76148 /* libPods-XMLY.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-XMLY.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -187,6 +199,8 @@
 		3C92BD7E25C2659B0018B9E7 /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
+				3C92BDBA25C3D5D90018B9E7 /* Model */,
+				3C92BDB925C3D5C70018B9E7 /* ViewModel */,
 				3C92BD9625C278020018B9E7 /* View */,
 			);
 			path = HomePage;
@@ -217,6 +231,8 @@
 				3C92BD9F25C279340018B9E7 /* YMHomePageView.m */,
 				3C92BDAA25C294900018B9E7 /* YMCarouselView.h */,
 				3C92BDAB25C294900018B9E7 /* YMCarouselView.m */,
+				3C92BDB325C3B0280018B9E7 /* YMTabItemView.h */,
+				3C92BDB425C3B0280018B9E7 /* YMTabItemView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -230,6 +246,26 @@
 				3C92BD8925C271C30018B9E7 /* YMBaseView.m */,
 			);
 			path = BaseView;
+			sourceTree = "<group>";
+		};
+		3C92BDB925C3D5C70018B9E7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3C92BDC425C3D66A0018B9E7 /* YMHomePageViewModel.h */,
+				3C92BDC525C3D66A0018B9E7 /* YMHomePageViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		3C92BDBA25C3D5D90018B9E7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3C92BDBB25C3D5F30018B9E7 /* YMItemModel.h */,
+				3C92BDBC25C3D5F30018B9E7 /* YMItemModel.m */,
+				3C92BDCA25C3D7B00018B9E7 /* YMBannerModel.h */,
+				3C92BDCB25C3D7B00018B9E7 /* YMBannerModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		9AC314D8A09C25FA7CDB4583 /* Pods */ = {
@@ -411,10 +447,14 @@
 				3C92BCAF25BFC06A0018B9E7 /* ViewController.m in Sources */,
 				3C92BCA925BFC06A0018B9E7 /* AppDelegate.m in Sources */,
 				3C92BCBA25BFC0750018B9E7 /* main.m in Sources */,
+				3C92BDBD25C3D5F30018B9E7 /* YMItemModel.m in Sources */,
 				3C92BCAC25BFC06A0018B9E7 /* SceneDelegate.m in Sources */,
 				3C92BD8A25C271C30018B9E7 /* YMBaseView.m in Sources */,
+				3C92BDB525C3B0290018B9E7 /* YMTabItemView.m in Sources */,
+				3C92BDC625C3D66A0018B9E7 /* YMHomePageViewModel.m in Sources */,
 				3C92BD9225C276720018B9E7 /* UIColor+Extensions.m in Sources */,
 				3C92BDAC25C294900018B9E7 /* YMCarouselView.m in Sources */,
+				3C92BDCC25C3D7B00018B9E7 /* YMBannerModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

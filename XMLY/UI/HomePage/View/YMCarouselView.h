@@ -1,6 +1,6 @@
 
 #import <UIKit/UIKit.h>
-
+#import "YMBannerModel.h"
 @class YMCarouselView;
 @protocol YMCarouselViewDelegate <NSObject>
 @optional
@@ -12,7 +12,7 @@
 
 @interface YMCarouselView : UIView
 //传入图片数组
-- (instancetype)initWithimages:(NSArray<UIImage *> *)images;
+- (void)refreshCarousel:(NSArray<YMBannerModel *> *)images;
 @property (weak, nonatomic) id<YMCarouselViewDelegate> delegate;
 
 @end

@@ -8,10 +8,12 @@
 #import "YMHomePageViewController.h"
 #import "YMGloableDefine.h"
 #import "YMHomePageView.h"
+#import "YMHomePageViewModel.h"
 @interface YMHomePageViewController ()
 @property (nonatomic, strong) UIButton *leftBtn;
 @property (nonatomic, strong) UIButton *rightBtn;
 @property (nonatomic, strong) YMHomePageView *homePageView;
+@property (nonatomic, strong) YMHomePageViewModel *viewModel;
 @end
 
 @implementation YMHomePageViewController
@@ -20,6 +22,7 @@
     [super viewDidLoad];
     [self setUPNavigationItem];
     [self setupUI];
+    [self initData];
 }
 
 #pragma mark - setnavigationItem
@@ -34,12 +37,34 @@
 {
     [self.view addSubview:self.homePageView];
 }
+#pragma mark -initData
+- (void)initData
+{
+    [self.homePageView refreshBanner:[self.viewModel fetchBannerModel]];
+    [self.homePageView refreshItem:[self.viewModel fetchItemModel]];
+}
 #pragma mark - private func
 - (void)sidebarClick
 {
     
 }
 - (void)locationClick
+{
+    
+}
+- (void)clickBanner:(NSInteger)index
+{
+    
+}
+- (void)clickOrder
+{
+    
+}
+- (void)clickBalance
+{
+    
+}
+- (void)clickEvaluate
 {
     
 }
@@ -75,9 +100,32 @@
     if (!_homePageView) {
         _homePageView = ({
             YMHomePageView *view = [[YMHomePageView alloc] initWithFrame:self.view.frame];
+            __weak typeof(self) weakSelf = self;
+            view.bannerBlock = ^(NSInteger index) {
+                [weakSelf clickBanner:index];
+            };
+            view.orderBlock = ^{
+                [weakSelf clickOrder];
+            };
+            view.balanceBlock = ^{
+                [weakSelf clickBalance];
+            };
+            view.evaluateBlock = ^{
+                [weakSelf clickEvaluate];
+            };
             view;
         });
     }
     return _homePageView;
+}
+- (YMHomePageViewModel *)viewModel
+{
+    if (!_viewModel) {
+        _viewModel = ({
+            YMHomePageViewModel *viewmodel = [[YMHomePageViewModel alloc] init];
+            viewmodel;
+        });
+    }
+    return _viewModel;
 }
 @end

@@ -8,8 +8,13 @@
 #import "YMHomePageView.h"
 #import "YMCarouselView.h"
 #import "YMGloableDefine.h"
+#import "YMTabItemView.h"
 @interface YMHomePageView () <YMCarouselViewDelegate>
 @property (nonatomic, strong) YMCarouselView *slideView;
+@property (nonatomic, strong) UIView *tabView;
+@property (nonatomic, strong) YMTabItemView *orderItemView;
+@property (nonatomic, strong) YMTabItemView *balanceItemView;
+@property (nonatomic, strong) YMTabItemView *evaluateItemView;
 @end
 
 @implementation YMHomePageView
@@ -26,6 +31,10 @@
 - (void)setupUI
 {
     [self addSubview:self.slideView];
+    [self addSubview:self.tabView];
+    [self.tabView addSubview:self.orderItemView];
+    [self.tabView addSubview:self.balanceItemView];
+    [self.tabView addSubview:self.evaluateItemView];
 }
 - (void)addUIConstraint
 {
@@ -33,23 +42,130 @@
         make.top.left.right.mas_equalTo(self);
         make.height.mas_equalTo(140*SCREEN_SCALE_375);
     }];
+    
+    [self.tabView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self);
+        make.top.mas_equalTo(self.slideView.mas_bottom);
+        make.height.mas_equalTo(60*SCREEN_SCALE_375);
+    }];
+    
+    CGFloat itemWidth = SCREEN_WIDTH/3;
+    [self.orderItemView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.bottom.mas_equalTo(self.tabView);
+        make.width.mas_equalTo(itemWidth);
+    }];
+    
+    [self.balanceItemView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.mas_equalTo(self.tabView);
+        make.width.mas_equalTo(itemWidth);
+        make.centerX.mas_equalTo(self.tabView);
+    }];
+    
+    [self.evaluateItemView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.right.mas_equalTo(self.tabView);
+        make.width.mas_equalTo(itemWidth);
+    }];
+}
+#pragma mark -public func
+- (void)refreshBanner:(NSArray<YMBannerModel *> *)model
+{
+    [self.slideView refreshCarousel:model];
+}
+- (void)refreshItem:(NSArray<YMItemModel *> *)model
+{
+    [self.orderItemView refreshTabItem:model[0]];
+    [self.balanceItemView refreshTabItem:model[1]];
+    [self.evaluateItemView refreshTabItem:model[2]];
 }
 #pragma mark -private func
+- (void)clickOrder
+{
+    if (self.orderBlock) {
+        self.orderBlock();
+    }
+}
+- (void)clickBalance
+{
+    if (self.balanceBlock) {
+        self.balanceBlock();
+    }
+}
+- (void)clickEvaluate
+{
+    if (self.evaluateBlock) {
+        self.evaluateBlock();
+    }
+}
 #pragma mark -YMCarouselViewDelegate
 - (void)carouselViewIndexOfClickedImage:(NSInteger)index
 {
-    NSLog(@"点击了第%d个广告",index);
+    if (self.bannerBlock) {
+        self.bannerBlock(index);
+    }
 }
 #pragma mark - lazy init
 - (YMCarouselView *)slideView
 {
     if (!_slideView) {
         _slideView = ({
-            YMCarouselView *carousel = [[YMCarouselView alloc] initWithimages:@[[UIImage imageNamed:@"banner1"],[UIImage imageNamed:@"banner2"],[UIImage imageNamed:@"banner3"]]];
+            YMCarouselView *carousel = [[YMCarouselView alloc] init];
             carousel.delegate = self;
             carousel;
         });
     }
     return _slideView;
+}
+- (UIView *)tabView
+{
+    if (!_tabView) {
+        _tabView = ({
+            UIView *view = [[UIView alloc] init];
+            view.backgroundColor = [UIColor whiteColor];
+            view;
+        });
+    }
+    return _tabView;
+}
+- (YMTabItemView *)orderItemView
+{
+    if (!_orderItemView) {
+        _orderItemView = ({
+            YMTabItemView *view = [[YMTabItemView alloc] init];
+            __weak typeof(self) weakSelf = self;
+            view.clickBlock = ^{
+                [weakSelf clickOrder];
+            };
+            view;
+        });
+    }
+    return _orderItemView;
+}
+- (YMTabItemView *)balanceItemView
+{
+    if (!_balanceItemView) {
+        _balanceItemView = ({
+            YMTabItemView *view = [[YMTabItemView alloc] init];
+            __weak typeof(self) weakSelf = self;
+            view.clickBlock = ^{
+                [weakSelf clickBalance];
+            };
+            view;
+        });
+    }
+    return _balanceItemView;
+}
+- (YMTabItemView *)evaluateItemView
+{
+    if (!_evaluateItemView) {
+        _evaluateItemView = ({
+            YMTabItemView *view = [[YMTabItemView alloc] init];
+            __weak typeof(self) weakSelf = self;
+            view.clickBlock = ^{
+                [weakSelf clickEvaluate];
+            };
+            view;
+        });
+    }
+    return _evaluateItemView;
 }
 @end
