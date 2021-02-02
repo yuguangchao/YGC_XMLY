@@ -10,6 +10,7 @@
 #import "YMGloableDefine.h"
 #import "YMTabItemView.h"
 #import "YMOrderComponent.h"
+#import "YMLocationManager.h"
 @interface YMHomePageView () <YMCarouselViewDelegate>
 @property (nonatomic, strong) YMCarouselView *slideView;
 @property (nonatomic, strong) UIView *tabView;
@@ -40,6 +41,7 @@
     [self.tabView addSubview:self.balanceItemView];
     [self.tabView addSubview:self.evaluateItemView];
     [self addSubview:self.mapView];
+    [self.mapView addSubview:[YMLocationManager sharedInstance].mapView];
     [self.mapView addSubview:self.orderComponent];
 }
 - (void)addUIConstraint
@@ -75,6 +77,10 @@
     [self.mapView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.mas_equalTo(self);
         make.top.mas_equalTo(self.tabView.mas_bottom);
+    }];
+    
+    [[YMLocationManager sharedInstance].mapView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self.mapView);
     }];
     
     [self.orderComponent mas_makeConstraints:^(MASConstraintMaker *make) {
