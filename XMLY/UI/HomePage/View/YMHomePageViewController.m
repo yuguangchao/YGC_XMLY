@@ -24,7 +24,14 @@
     [self setupUI];
     [self initData];
 }
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.homePageView startOrderAnimation];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.homePageView stopOrderAnimation];
+}
 #pragma mark - setnavigationItem
 - (void)setUPNavigationItem
 {
@@ -65,6 +72,10 @@
     
 }
 - (void)clickEvaluate
+{
+    
+}
+- (void)clickStartOrder
 {
     
 }
@@ -112,6 +123,9 @@
             };
             view.evaluateBlock = ^{
                 [weakSelf clickEvaluate];
+            };
+            view.startOrderBlock = ^{
+                [weakSelf clickStartOrder];
             };
             view;
         });

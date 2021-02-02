@@ -9,12 +9,16 @@
 #import "YMCarouselView.h"
 #import "YMGloableDefine.h"
 #import "YMTabItemView.h"
+#import "YMOrderComponent.h"
 @interface YMHomePageView () <YMCarouselViewDelegate>
 @property (nonatomic, strong) YMCarouselView *slideView;
 @property (nonatomic, strong) UIView *tabView;
 @property (nonatomic, strong) YMTabItemView *orderItemView;
 @property (nonatomic, strong) YMTabItemView *balanceItemView;
 @property (nonatomic, strong) YMTabItemView *evaluateItemView;
+@property (nonatomic, strong) YMBaseView *mapView;
+@property (nonatomic, strong) YMOrderComponent *orderComponent;
+@property (nonatomic, strong) NSArray<UIImage *> *orderImageArr;
 @end
 
 @implementation YMHomePageView
@@ -35,6 +39,8 @@
     [self.tabView addSubview:self.orderItemView];
     [self.tabView addSubview:self.balanceItemView];
     [self.tabView addSubview:self.evaluateItemView];
+    [self addSubview:self.mapView];
+    [self.mapView addSubview:self.orderComponent];
 }
 - (void)addUIConstraint
 {
@@ -65,6 +71,16 @@
         make.top.bottom.right.mas_equalTo(self.tabView);
         make.width.mas_equalTo(itemWidth);
     }];
+    
+    [self.mapView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.mas_equalTo(self);
+        make.top.mas_equalTo(self.tabView.mas_bottom);
+    }];
+    
+    [self.orderComponent mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.mas_equalTo(self.mapView);
+        make.width.height.mas_equalTo(120*SCREEN_SCALE_375);
+    }];
 }
 #pragma mark -public func
 - (void)refreshBanner:(NSArray<YMBannerModel *> *)model
@@ -76,6 +92,14 @@
     [self.orderItemView refreshTabItem:model[0]];
     [self.balanceItemView refreshTabItem:model[1]];
     [self.evaluateItemView refreshTabItem:model[2]];
+}
+- (void)startOrderAnimation
+{
+    [self.orderComponent startAnimation];
+}
+- (void)stopOrderAnimation
+{
+    [self.orderComponent stopAnimation];
 }
 #pragma mark -private func
 - (void)clickOrder
@@ -94,6 +118,12 @@
 {
     if (self.evaluateBlock) {
         self.evaluateBlock();
+    }
+}
+- (void)startOrderClick
+{
+    if (self.startOrderBlock) {
+        self.startOrderBlock();
     }
 }
 #pragma mark -YMCarouselViewDelegate
@@ -167,5 +197,42 @@
         });
     }
     return _evaluateItemView;
+}
+- (YMBaseView *)mapView
+{
+    if (!_mapView) {
+        _mapView = ({
+            YMBaseView *view = [[YMBaseView alloc] init];
+            view;
+        });
+    }
+    return _mapView;
+}
+- (YMOrderComponent *)orderComponent
+{
+    if (!_orderComponent) {
+        _orderComponent = ({
+            YMOrderComponent *view = [[YMOrderComponent alloc] initWithImageArr:self.orderImageArr title:@"开始\n接单" defaultImage:[UIImage imageNamed:@"OrderButton1"]];
+            __weak typeof(self) weakSelf = self;
+            view.clickBlock = ^{
+                [weakSelf startOrderClick];
+            };
+            view;
+        });
+    }
+    return _orderComponent;
+}
+- (NSArray<UIImage *> *)orderImageArr
+{
+    if (!_orderImageArr) {
+        _orderImageArr = ({
+            NSMutableArray *imageArr = [NSMutableArray array];
+            for (int i = 1; i < 10; i++) {
+                [imageArr addObject:[UIImage imageNamed:[NSString stringWithFormat:@"OrderButton%d",i]]];
+            }
+            imageArr;
+        });
+    }
+    return _orderImageArr;
 }
 @end

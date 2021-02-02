@@ -15,8 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) void (^orderBlock)(void);
 @property (nonatomic, copy) void (^balanceBlock)(void);
 @property (nonatomic, copy) void (^evaluateBlock)(void);
+@property (nonatomic, copy) void (^startOrderBlock)(void);
 - (void)refreshBanner:(NSArray<YMBannerModel *> *)model;
 - (void)refreshItem:(NSArray<YMItemModel *> *)model;
+- (void)startOrderAnimation;
+- (void)stopOrderAnimation;
 @end
 
 NS_ASSUME_NONNULL_END
